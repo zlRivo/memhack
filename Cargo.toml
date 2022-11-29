@@ -1,0 +1,2 @@
+[workspace]
+members = ["memhack", "test-program"]
