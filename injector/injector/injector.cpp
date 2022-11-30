@@ -34,9 +34,14 @@ DWORD GetProcID(const char* name)
     return pid;
 }
 
-int main()
+int main(int argc, char* argv[])
 {
-    DWORD pid = GetProcID("test-program.exe");
+    if (argc != 3) {
+        std::cerr << "Usage: injector.exe <DLL> <PROCESS NAME>" << std::endl;
+        exit(1);
+    }
+
+    DWORD pid = GetProcID(argv[2]);
     if (pid == 0)
     {
         std::cerr << "Could not find process ID! Exiting." << std::endl;
@@ -47,11 +52,11 @@ int main()
 
     // Get the full name path of the dll
     char dllPath[MAX_PATH] = { 0 };
-    GetFullPathNameA("C:\\Users\\bowir\\Documents\\projects\\memhack\\target\\release\\memhack.dll", MAX_PATH, dllPath, NULL);
+    GetFullPathNameA(argv[1], MAX_PATH, dllPath, NULL);
 
     // Ensure file exists
     LPWIN32_FIND_DATAA find_data;
-    if (GetFileAttributesA("C:\\Users\\bowir\\Documents\\projects\\memhack\\target\\release\\memhack.dll") == 0xFFFFFFFF)
+    if (GetFileAttributesA(dllPath) == 0xFFFFFFFF)
     {
         std::cerr << "Could not find DLL. Exiting" << std::endl;
         exit(1);

@@ -1,3 +1,0 @@
-﻿  injector.cpp
-C:\Users\bowir\source\repos\injector\injector\injector.cpp(53,24): warning C4101: 'find_data': unreferenced local variable
-  injector.vcxproj -> C:\Users\bowir\source\repos\injector\x64\Debug\injector.exe
